@@ -1,6 +1,10 @@
-# 🌀 ZNCode System (ZNC) EN
 
-**From the Author:** This project was created purely out of boredom. I honestly didn't expect the final result to be such a "beast." It is a tool for those who need things done fast, powerfully, and without unnecessary questions.
+
+---
+
+# 🌀 ZNCode System (ZNC)
+
+**From the Author:** This project was created purely out of boredom. I honestly didn't expect the final result to be such a "beast". It is a tool for those who need things done fast, powerfully, and without unnecessary questions.
 
 ---
 
@@ -8,7 +12,7 @@
 
 ### What is it?
 
-**ZNCode** - is a modular environment and wrapper language that allows you to turn massive chunks of code into a single simple command. It is a construction kit where you define the rules of the game.
+**ZNCode** - is a modular environment and wrapper language that allows you to turn massive chunks of code into a single simple command. It is a construction kit where you define the rules of the game. The language does not position itself as a tool for malware, but it doesn't limit the developer's imagination either.
 
 ### System Pros
 
@@ -17,28 +21,175 @@
 
 
 * 
-**Modular Repair:** If something breaks, you don't need to dig through the entire engine — just fix the specific logic module.
+**Modular Repair:** If something breaks, you don't need to dig through the entire engine — just fix the specific logic module without touching the core.
 
 
 * 
 **Direct PC Contact:** Your commands interact with the system directly through the interpreter.
 
 
-* **Target Efficiency:** ZNC is designed for scenarios where standard languages are too cumbersome, allowing you to pack entire scripts into one command or build tools for highly specific tasks.
+* 
+**Target Efficiency:** ZNC is designed for scenarios where standard languages are too slow or cumbersome, allowing you to pack entire scripts into one command or build tools for highly specific tasks.
+
+
 
 ### Cons and Security
 
-* **The Shadow Side:** The language's flexibility makes it convenient for creating "specific" or undesirable software.
-* **"The Sloth" Protection:** To limit uncontrolled distribution of malicious code, there is no built-in compilation function (the author was too lazy, so it became a security feature). Code can only run if the ZNC environment is present. If you need an `.exe` — you must write the compiler yourself.
+* 
+**The Shadow Side:** The language's flexibility makes it convenient for creating "specific" or undesirable software.
+
+
+* 
+**"The Sloth" Protection:** To limit uncontrolled distribution of code, there is no built-in compilation function (the author was too lazy, so it became a security feature).
+
+
+* 
+**Execution Constraint:** Code can only run if the ZNC environment is present. If you need an `.exe` — you must write the compiler yourself!
+
+
 
 ### Installation & Management
 
 * 
-**Lazy Version:** Place `ZNCodeInstaller.py` and `start installation (for the lazy).bat` in one folder and run the `.bat` file. It automatically builds the directory structure (`ZNCRoot/Code`, `Imports`, `Sys`).
+**Lazy Version:** Ensure `ZNCodeInstaller.py` and `start installation (for the lazy).bat` are in the same folder. Run the `.bat` file to automatically build the directory structure (`ZNCRoot/Code`, `Imports`, `Sys`).
 
 
-* **ZNP Manager:** A graphical utility to manage modules. The **text** module is ready by default, while the **ui** module comes as a `.znp` package. To use UI, select it in the manager and click **Install**.
-* **Sys Code:** This is your entry point. It uses the `display directory <name>` command to trigger specific blocks of logic.
+* 
+**ZNP Manager:** A graphical utility to manage module packages.
+
+
+* The **text** module is ready by default.
+
+
+* The **ui** module comes as a `.znp` package; select it in the manager and click **Install** to enable window drawing.
+
+
+
+
+* 
+**Sys Code:** This is the entry point of your script. It uses the `display directory <name>` command to trigger specific blocks.
+
+
+
+---
+
+## 🛠 SECTION TWO: DEVELOPMENT GUIDE
+
+### How to write in ZNC
+
+Code is divided into blocks (directories). Commands start with a hyphen `-`, and data is written in square brackets `[" "]`.
+
+* 
+`import` - must always be written at the very top of the file.
+
+
+* 
+`Sys code` - the section where you define which directory to launch.
+
+
+
+**Example `main.znc`:**
+
+```text
+import text
+import ui
+
+main code (
+    - print ["System starting..."]
+    - window ["My Program"]
+)
+
+Sys code (
+    display directory <main>
+)
+
+```
+
+### How to write ZNP (Packages)
+
+A package is a single file combining the interface and the logic. It consists of two tags: `{INTERFACE}` and `{LOGIC}`.
+
+* 
+**ZNM (Interface):** Describes how a command maps to a logic key.
+
+
+* 
+**ZNMM (Logic):** Contains the actual machine execution logic.
+
+
+
+**Example `ui.znp`:** 
+
+```text
+{INTERFACE}
+name = ui
+command (
+- window [""] = SYS.UI.CREATE
+- label [""] = SYS.UI.LABEL
+)
+
+{LOGIC}
+SYS.UI.CREATE => ctx["win"] = tk.Toplevel(); ctx["win"].title(ctx["arg"]); ctx["win"].geometry("300x200")
+SYS.UI.LABEL => if "win" in ctx: tk.Label(ctx["win"], text=ctx["arg"]).pack()
+
+```
+
+---
+
+## 💎 USEFUL INFO
+
+### How it works internally
+
+1. 
+**import:** Connects a "dictionary" from the `Imports/` folder.
+
+
+2. 
+**Connection:** The system looks into the `.znm` file to find the logic key for a command.
+
+
+3. 
+**Execution:** The system goes to the `Sys/` folder, finds that key, and executes the hidden code.
+
+
+
+### Base Commands for Logic (ZNMM)
+
+* 
+`self.log(ctx["arg"])` - output text to the IDE console.
+
+
+* 
+`ctx["arg"]` - retrieves the data string provided in the ZNC brackets.
+
+
+* 
+`tk.Toplevel()` - creates a new UI window.
+
+
+* 
+**Note:** The number of commands is infinite. You can insert any system calls (Windows) or even pull in other languages (like Java) if they are installed on the PC.
+
+
+
+### Abbreviation Key:
+
+* 
+**ZNC** - ZNCode (Your script).
+
+
+* 
+**ZNP** - ZNPackage (The module archive).
+
+
+* 
+**ZNM** - ZNModule (Interface definition).
+
+
+* 
+**ZNMM** - ZNModuleManager (Machine logic definition).
+
+
 
 ---
 
