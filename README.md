@@ -2,7 +2,7 @@
 
 ---
 
-# 🌀 ZNCode System (ZNC)
+# 🌀 ZNCode System (ZNC) EN
 
 **From the Author:** This project was created purely out of boredom. I honestly didn't expect the final result to be such a "beast". It is a tool for those who need things done fast, powerfully, and without unnecessary questions.
 
