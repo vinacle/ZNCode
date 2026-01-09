@@ -1,0 +1,1 @@
+terminal.log => self.log(f"> {ctx['arg']}", ctx.get("color", "#ffffff"))
