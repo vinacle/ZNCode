@@ -21,7 +21,7 @@
 
 
 * 
-**Modular Repair:** If something breaks, you don't need to dig through the entire engine — just fix the specific logic module without touching the core.
+**Modular Repair:** If something breaks, you don't need to dig through the entire engine - just fix the specific logic module without touching the core.
 
 
 * 
@@ -44,7 +44,7 @@
 
 
 * 
-**Execution Constraint:** Code can only run if the ZNC environment is present. If you need an `.exe` — you must write the compiler yourself!
+**Execution Constraint:** Code can only run if the ZNC environment is present. If you need an `.exe` - you must write the compiler yourself!
 
 
 
@@ -262,7 +262,7 @@ Sys code (
 
 ### Как писать ZNP (Пакеты)
 
-Пакет — это один файл, объединяющий интерфейс (**ZNM**) и логику (**ZNMM**).
+Пакет - это один файл, объединяющий интерфейс (**ZNM**) и логику (**ZNMM**).
 
 * **{INTERFACE} (ZNM):** Описывает связь команды с ключом логики.
 * **{LOGIC} (ZNMM):** Содержит реальный машинный код исполнения.
