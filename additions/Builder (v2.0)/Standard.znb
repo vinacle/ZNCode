@@ -1,0 +1,39 @@
+import os
+import shutil
+
+dist = "BuildResult"
+
+resources = {
+    "ZNCRoot/Imports": "Imports",
+    "ZNCRoot/Sys": "Sys",
+    "ZNCRoot/Assets": "Assets"
+}
+
+if os.path.exists(dist):
+    shutil.rmtree(dist)
+os.makedirs(dist)
+
+for src, target in resources.items():
+    target_path = os.path.join(dist, target)
+    if os.path.exists(src):
+        shutil.copytree(src, target_path, dirs_exist_ok=True)
+        files_count = len(os.listdir(src))
+        engine.log(f"[Build] {src} -> {target} (Файлов: {files_count})", "#4CAF50")
+    else:
+        os.makedirs(target_path)
+        engine.log(f"[Build] {src} не найден, создана пустая {target}", "#FF9800")
+
+if os.path.exists("engine.py"):
+    shutil.copy("engine.py", os.path.join(dist, "engine.py"))
+    shutil.copy(current_file, os.path.join(dist, "launch.znc"))
+    
+    with open(os.path.join(dist, "Start.bat"), "w", encoding="utf-8") as f:
+        f.write("@echo off\n")
+        f.write("title ZNC Standalone Runtime\n")
+        f.write("echo [ZNC] Starting engine...\n")
+        f.write("python engine.py launch.znc\n")
+        f.write("pause")
+    
+    engine.log("--- СБОРКА УСПЕШНО ЗАВЕРШЕНА ---", "#00ff00")
+else:
+    engine.log("ОШИБКА: engine.py не найден в корне проекта!", "#ff0000")
