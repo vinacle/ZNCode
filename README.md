@@ -1,4 +1,4 @@
-
+Готово. Я заменил все длинные тире (`—`) на обычные дефисы (`-`) во всем тексте.
 
 ---
 
@@ -16,60 +16,42 @@
 
 ### System Pros
 
-* 
+* 
 **Extreme Lightweight:** The system takes up minimal disk space and consumes almost zero PC resources.
 
-
-* 
+* 
 **Modular Repair:** If something breaks, you don't need to dig through the entire engine - just fix the specific logic module without touching the core.
 
-
-* 
+* 
 **Direct PC Contact:** Your commands interact with the system directly through the interpreter.
 
-
-* 
+* 
 **Target Efficiency:** ZNC is designed for scenarios where standard languages are too slow or cumbersome, allowing you to pack entire scripts into one command or build tools for highly specific tasks.
-
-
 
 ### Cons and Security
 
-* 
+* 
 **The Shadow Side:** The language's flexibility makes it convenient for creating "specific" or undesirable software.
 
-
-* 
+* 
 **"The Sloth" Protection:** To limit uncontrolled distribution of code, there is no built-in compilation function (the author was too lazy, so it became a security feature).
 
-
-* 
+* 
 **Execution Constraint:** Code can only run if the ZNC environment is present. If you need an `.exe` - you must write the compiler yourself!
-
-
 
 ### Installation & Management
 
-* 
+* 
 **Lazy Version:** Ensure `ZNCodeInstaller.py` and `start installation (for the lazy).bat` are in the same folder. Run the `.bat` file to automatically build the directory structure (`ZNCRoot/Code`, `Imports`, `Sys`).
 
-
-* 
+* 
 **ZNP Manager:** A graphical utility to manage module packages.
 
-
 * The **text** module is ready by default.
-
-
 * The **ui** module comes as a `.znp` package; select it in the manager and click **Install** to enable window drawing.
 
-
-
-
-* 
+* 
 **Sys Code:** This is the entry point of your script. It uses the `display directory <name>` command to trigger specific blocks.
-
-
 
 ---
 
@@ -79,14 +61,11 @@
 
 Code is divided into blocks (directories). Commands start with a hyphen `-`, and data is written in square brackets `[" "]`.
 
-* 
+* 
 `import` - must always be written at the very top of the file.
 
-
-* 
+* 
 `Sys code` - the section where you define which directory to launch.
-
-
 
 **Example `main.znc`:**
 
@@ -95,13 +74,14 @@ import text
 import ui
 
 main code (
-    - print ["System starting..."]
-    - window ["My Program"]
+    - print ["System starting..."]
+    - window ["My Program"]
 )
 
 Sys code (
-    display directory <main>
+    display directory <main>
 )
+
 
 ```
 
@@ -109,16 +89,13 @@ Sys code (
 
 A package is a single file combining the interface and the logic. It consists of two tags: `{INTERFACE}` and `{LOGIC}`.
 
-* 
+* 
 **ZNM (Interface):** Describes how a command maps to a logic key.
 
-
-* 
+* 
 **ZNMM (Logic):** Contains the actual machine execution logic.
 
-
-
-**Example `ui.znp`:** 
+**Example `ui.znp`:** 
 
 ```text
 {INTERFACE}
@@ -132,6 +109,7 @@ command (
 SYS.UI.CREATE => ctx["win"] = tk.Toplevel(); ctx["win"].title(ctx["arg"]); ctx["win"].geometry("300x200")
 SYS.UI.LABEL => if "win" in ctx: tk.Label(ctx["win"], text=ctx["arg"]).pack()
 
+
 ```
 
 ---
@@ -140,56 +118,42 @@ SYS.UI.LABEL => if "win" in ctx: tk.Label(ctx["win"], text=ctx["arg"]).pack()
 
 ### How it works internally
 
-1. 
+1. 
 **import:** Connects a "dictionary" from the `Imports/` folder.
 
-
-2. 
+2. 
 **Connection:** The system looks into the `.znm` file to find the logic key for a command.
 
-
-3. 
+3. 
 **Execution:** The system goes to the `Sys/` folder, finds that key, and executes the hidden code.
-
-
 
 ### Base Commands for Logic (ZNMM)
 
-* 
+* 
 `self.log(ctx["arg"])` - output text to the IDE console.
 
-
-* 
+* 
 `ctx["arg"]` - retrieves the data string provided in the ZNC brackets.
 
-
-* 
+* 
 `tk.Toplevel()` - creates a new UI window.
 
-
-* 
+* 
 **Note:** The number of commands is infinite. You can insert any system calls (Windows) or even pull in other languages (like Java) if they are installed on the PC.
-
-
 
 ### Abbreviation Key:
 
-* 
+* 
 **ZNC** - ZNCode (Your script).
 
-
-* 
+* 
 **ZNP** - ZNPackage (The module archive).
 
-
-* 
+* 
 **ZNM** - ZNModule (Interface definition).
 
-
-* 
+* 
 **ZNMM** - ZNModuleManager (Machine logic definition).
-
-
 
 ---
 
@@ -207,30 +171,26 @@ SYS.UI.LABEL => if "win" in ctx: tk.Label(ctx["win"], text=ctx["arg"]).pack()
 
 ### Плюсы системы
 
-* 
+* 
 **Экстремальная легкость:** Система занимает минимум места на диске и практически не потребляет ресурсы ПК.
 
+* 
+**Модульный ремонт:** Если что-то сломалось, не нужно ковырять всё ядро - достаточно пофиксить один модуль логики, не трогая движок.
 
-* 
-**Модульный ремонт:** Если что-то сломалось, не нужно ковырять всё ядро — достаточно пофиксить один модуль логики, не трогая движок.
-
-
-* 
+* 
 **Прямой контакт с ПК:** Твои команды взаимодействуют с системой напрямую через интерпретатор.
-
 
 * **Область применения:** Язык идеален для задач, где обычные языки слишком громоздки. Например, когда нужно упаковать целый скрипт в одну команду или создать инструмент под узкую задачу.
 
 ### Минусы и Безопасность
 
 * **Теневая сторона:** Гибкость языка делает его удобным для создания «специфического» софта.
-* **Защита «Ленивца»:** Чтобы ограничить бесконтрольное распространение кода, автор не добавил функцию компиляции (было лень). Это «фича безопасности»: запустить код можно только имея среду ZNC. Если нужен .exe — пиши компилятор сам!
+* **Защита «Ленивца»:** Чтобы ограничить бесконтрольное распространение кода, автор не добавил функцию компиляции (было лень). Это «фича безопасности»: запустить код можно только имея среду ZNC. Если нужен .exe - пиши компилятор сам!
 
 ### Установка и работа
 
-* 
+* 
 **Версия для ленивых:** Запустите **`start installation (for the lazy).bat`**. Он автоматически создаст структуру папок (`ZNCRoot/Code`, `Imports`, `Sys`) и базовые файлы.
-
 
 * **Менеджер ZNP:** Утилита для управления пакетами. Модуль **text** готов сразу. Модуль **ui** идет в виде пакета `.znp`. Зайдите в менеджер, выберите его и нажмите **Install**, чтобы начать рисовать окна.
 * **Sys code:** Точка входа в программу. Использует команду `display directory <название>` для запуска конкретных блоков кода.
@@ -250,13 +210,14 @@ import text
 import ui
 
 main code (
-    - print ["Запуск системы..."]
-    - window ["Моя Программа"]
+    - print ["Запуск системы..."]
+    - window ["Моя Программа"]
 )
 
 Sys code (
-    display directory <main>
+    display directory <main>
 )
+
 
 ```
 
@@ -280,6 +241,7 @@ command (
 {LOGIC}
 SYS.UI.CREATE => ctx["win"] = tk.Toplevel(); ctx["win"].title(ctx["arg"]); ctx["win"].geometry("300x200")
 SYS.UI.LABEL => if "win" in ctx: tk.Label(ctx["win"], text=ctx["arg"]).pack()
+
 
 ```
 
@@ -322,6 +284,7 @@ command (
 )
 
 {LOGIC}
-B.FULL_RUN => import os, shutil, re; name = ctx.get("arg", "App"); dist = f"Dist_{name}"; assets = f"{dist}/assets"; os.makedirs(assets, exist_ok=True); [os.makedirs(f"{assets}/{d}", exist_ok=True) for d in ["Code", "Imports", "Sys"]]; [[shutil.copy(f"ZNCRoot/{f}/{i}", f"{assets}/{f}/{i}") for i in os.listdir(f"ZNCRoot/{f}") if "builder" not in i.lower()] for f in ["Code", "Imports", "Sys"] if os.path.exists(f"ZNCRoot/{f}")]; main_p = f"{assets}/Code/main.znc"; c = open(main_p, "r", encoding="utf-8").read() if os.path.exists(main_p) else ""; clean = re.sub(r'import\s+zn_builder|-\s+build\s*\[".*?"\]', '', c); open(main_p, "w", encoding="utf-8").write(clean.strip()) if main_p else None; shutil.copy("ide.py", f"{dist}/ide.py") if os.path.exists("ide.py") else None; f = open(f"{dist}/Runner.py", "w", encoding="utf-8"); f.write("import os, tkinter as tk\nfrom ide import ZNCEngine\nroot = tk.Tk()\nroot.withdraw()\nengine = ZNCEngine('assets', tk.Text(root))\nengine.log = lambda t, c=None: print(f'[LOG]: {t}')\nif __name__ == '__main__':\n    with open('assets/Code/main.znc', 'r', encoding='utf-8') as z:\n        engine.run(z.read())\n    input('\\nDone.')"); f.close(); b = open(f"{dist}/run_app.bat", "w"); b.write(f"@echo off\ntitle {name}\npython Runner.py\npause"); b.close(); self.log(f"Чистая сборка {name} готова!", "#00ff00")
+B.FULL_RUN => import os, shutil, re; name = ctx.get("arg", "App"); dist = f"Dist_{name}"; assets = f"{dist}/assets"; os.makedirs(assets, exist_ok=True); [os.makedirs(f"{assets}/{d}", exist_ok=True) for d in ["Code", "Imports", "Sys"]]; [[shutil.copy(f"ZNCRoot/{f}/{i}", f"{assets}/{f}/{i}") for i in os.listdir(f"ZNCRoot/{f}") if "builder" not in i.lower()] for f in ["Code", "Imports", "Sys"] if os.path.exists(f"ZNCRoot/{f}")]; main_p = f"{assets}/Code/main.znc"; c = open(main_p, "r", encoding="utf-8").read() if os.path.exists(main_p) else ""; clean = re.sub(r'import\s+zn_builder|-\s+build\s*\[".*?"\]', '', c); open(main_p, "w", encoding="utf-8").write(clean.strip()) if main_p else None; shutil.copy("ide.py", f"{dist}/ide.py") if os.path.exists("ide.py") else None; f = open(f"{dist}/Runner.py", "w", encoding="utf-8"); f.write("import os, tkinter as tk\nfrom ide import ZNCEngine\nroot = tk.Tk()\nroot.withdraw()\nengine = ZNCEngine('assets', tk.Text(root))\nengine.log = lambda t, c=None: print(f'[LOG]: {t}')\nif __name__ == '__main__':\n    with open('assets/Code/main.znc', 'r', encoding='utf-8') as z:\n        engine.run(z.read())\n    input('\\nDone.')"); f.close(); b = open(f"{dist}/run_app.bat", "w"); b.write(f"@echo off\ntitle {name}\npython Runner.py\npause"); b.close(); self.log(f"Чистая сборка {name} готова!", "#00ff00")
+
 
 ```
