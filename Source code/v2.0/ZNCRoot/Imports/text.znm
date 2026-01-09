@@ -1,0 +1,4 @@
+name = text
+command (
+- print [""] = terminal.log
+)
