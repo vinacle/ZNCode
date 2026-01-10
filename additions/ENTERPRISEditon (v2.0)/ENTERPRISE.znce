@@ -258,4 +258,5 @@ patched_syntax()
 refresh_znp()
 run_auto_save()
 
-self.engine.log("=== ENTERPRISE SYSTEM LOADED ===", "#ffd700")
+self.engine.log("=== ENTERPRISE SYSTEM By ZalupkaDev LOADED ===", "#ffd700")
+
