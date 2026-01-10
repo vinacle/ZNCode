@@ -45,7 +45,7 @@ def log_debug(msg):
         try:
             if not self.debug_win or not tk.Toplevel.winfo_exists(self.debug_win):
                 self.debug_win = tk.Toplevel(self.root)
-                self.debug_win.title("Zalupka Debug Monitor")
+                self.debug_win.title("ZNC Debug Monitor")
                 self.debug_win.geometry("500x300")
                 self.debug_text = scrolledtext.ScrolledText(self.debug_win, bg="black", fg="cyan", font=("Consolas", 9))
                 self.debug_text.pack(expand=True, fill="both")
@@ -121,7 +121,7 @@ self.apply_syntax = patched_syntax
 
 def open_mega_settings():
     s_win = tk.Toplevel(self.root)
-    s_win.title("VS Zalupka Enterprise Settings")
+    s_win.title("ZNC Enterprise Settings")
     s_win.geometry("500x800")
     s_win.configure(bg="#2d2d2d")
 
@@ -257,4 +257,5 @@ apply_styles()
 patched_syntax()
 refresh_znp()
 run_auto_save()
+
 self.engine.log("=== ENTERPRISE SYSTEM LOADED ===", "#ffd700")
